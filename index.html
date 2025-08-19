@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nails by Anna - Artistry at Your Fingertips</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Professional nail services by Anna. Expert manicures, nail art, and gel services in a relaxing studio environment.">
+    <meta name="keywords" content="nails, manicure, nail art, gel nails, nail technician, nail salon">
+    <meta name="author" content="Nails by Anna">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Nails by Anna - Artistry at Your Fingertips">
+    <meta property="og:description" content="Professional nail services by Anna. Expert manicures, nail art, and gel services.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://nailsbyanna.com">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Custom Styles -->
+    <style>
+        /* Define custom theme colors and fonts for Tailwind */
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#D8B4B6', // Dusty Rose
+                        'secondary': '#F5F0EC', // Cream/Off-White
+                        'accent': '#846B8A', // Deep Mauve
+                        'text-main': '#363636', // Charcoal
+                    },
+                    fontFamily: {
+                        'heading': ['Dancing Script', 'cursive'],
+                        'body': ['Montserrat', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in-down': 'fade-in-down 1s ease-out forwards',
+                        'fade-in-up': 'fade-in-up 0.8s ease-out forwards',
+                        'scale-in': 'scale-in 0.6s ease-out forwards',
+                    },
+                    keyframes: {
+                        'fade-in-down': {
+                            '0%': { opacity: '0', transform: 'translateY(-20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        'fade-in-up': {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        'scale-in': {
+                            '0%': { opacity: '0', transform: 'scale(0.9)' },
+                            '100%': { opacity: '1', transform: 'scale(1)' },
+                        }
+                    }
+                }
+            }
+        }
+        
+        /* Loading spinner */
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #846B8A;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Accessibility improvements */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+        
+        /* Focus styles for accessibility */
+        .focus-visible:focus {
+            outline: 2px solid #846B8A;
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body class="bg-secondary font-body text-text-main">
+    <!-- Language Selector -->
+    <div class="bg-accent/10 py-2">
+        <div class="container mx-auto px-6 flex justify-end">
+            <select id="language-selector" class="bg-transparent text-sm text-text-main focus:outline-none cursor-pointer">
+                <option value="en">English</option>
+                <option value="es">Español</option>
+                <option value="fr">Français</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Header & Navigation -->
+    <header class="bg-secondary/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <!-- Updated Logo to match business card -->
+            <a href="#home" class="relative grid place-items-center w-32 h-12" title="Nails by Anna Home">
+                <span class="font-body text-5xl font-extrabold uppercase tracking-widest text-text-main/20 col-start-1 row-start-1">Nails</span>
+                <span class="font-heading text-3xl text-accent col-start-1 row-start-1">by Anna</span>
+            </a>
+            <div class="hidden md:flex space-x-8 items-center">
+                <a href="#home" class="hover:text-accent transition-colors duration-300" data-translate="nav_home">Home</a>
+                <a href="#services" class="hover:text-accent transition-colors duration-300" data-translate="nav_services">Services</a>
+                <a href="#gallery" class="hover:text-accent transition-colors duration-300" data-translate="nav_gallery">Gallery</a>
+                <a href="#contact" class="hover:text-accent transition-colors duration-300" data-translate="nav_contact">Contact</a>
+                <a href="#booking" class="bg-accent text-white px-5 py-2 rounded-full hover:bg-opacity-90 transition-all duration-300 shadow-md" data-translate="nav_book">Book Now</a>
+            </div>
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden text-2xl">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 space-y-2">
+            <a href="#home" class="block hover:text-accent transition-colors duration-300" data-translate="nav_home">Home</a>
+            <a href="#services" class="block hover:text-accent transition-colors duration-300" data-translate="nav_services">Services</a>
+            <a href="#gallery" class="block hover:text-accent transition-colors duration-300" data-translate="nav_gallery">Gallery</a>
+            <a href="#contact" class="block hover:text-accent transition-colors duration-300" data-translate="nav_contact">Contact</a>
+            <a href="#booking" class="block bg-accent text-white text-center mt-2 px-5 py-2 rounded-full hover:bg-opacity-90 transition-all duration-300 shadow-md" data-translate="nav_book">Book Now</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="relative min-h-[60vh] md:min-h-[80vh] flex items-center bg-cover bg-center" style="background-image: url('https://placehold.co/1600x900/D8B4B6/F5F0EC?text=Beautiful+Nails');">
+            <div class="absolute inset-0 bg-black bg-opacity-30"></div>
+            <div class="container mx-auto px-6 text-center relative z-10">
+                <h1 class="text-5xl md:text-8xl font-heading text-white font-bold mb-4 animate-fade-in-down" data-translate="hero_title">Artistry at Your Fingertips</h1>
+                <p class="text-lg md:text-xl text-white max-w-2xl mx-auto mb-8" data-translate="hero_subtitle">Experience bespoke nail care in a relaxing and professional environment.</p>
+                <a href="#booking" class="bg-accent text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-opacity-90 transition-all duration-300 shadow-lg transform hover:scale-105" data-translate="hero_cta">Book Your Appointment</a>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-20">
+            <div class="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+                <div class="text-center md:text-left">
+                    <h2 class="text-4xl md:text-5xl font-heading text-accent mb-4" data-translate="about_title">Welcome to my Studio</h2>
+                    <p class="mb-4 text-gray-600 leading-relaxed" data-translate="about_text1">
+                        Hi, I'm Anna! As a passionate and certified nail technician, I'm dedicated to providing beautiful, long-lasting manicures that reflect your personal style. I believe every set of nails is a unique work of art.
+                    </p>
+                    <p class="text-gray-600 leading-relaxed" data-translate="about_text2">
+                        My studio is a clean, calm, and welcoming space where you can relax while I work my magic. I use only high-quality, professional-grade products to ensure the health and beauty of your natural nails.
+                    </p>
+                </div>
+                <div>
+                    <img src="https://placehold.co/600x600/D8B4B6/363636?text=Anna" alt="Nail Technician Anna" class="rounded-lg shadow-2xl w-full max-w-md mx-auto aspect-square object-cover">
+                </div>
+            </div>
+        </section>
+        
+        <!-- Services Section -->
+        <section id="services" class="py-20 bg-primary/20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl md:text-5xl font-heading text-accent mb-2" data-translate="services_title">Services & Pricing</h2>
+                    <p class="text-gray-600" data-translate="services_subtitle">Clear pricing for all your nail care needs.</p>
+                </div>
+                <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
+                    <!-- Manicures -->
+                    <div class="bg-secondary p-6 rounded-lg shadow-lg">
+                        <h3 class="text-2xl font-semibold text-text-main mb-4" data-translate="services_manicures">Manicures</h3>
+                        <ul class="space-y-4 text-gray-700">
+                            <li class="flex justify-between border-b border-primary pb-2"><span data-translate="service_classic">Classic Manicure (with Gel)</span> <span class="font-bold text-accent">$45</span></li>
+                            <li class="flex justify-between border-b border-primary pb-2"><span data-translate="service_structured">Structured Gel Manicure</span> <span class="font-bold text-accent">$55</span></li>
+                            <li class="flex justify-between"><span data-translate="service_dry">Dry Manicure</span> <span class="font-bold text-accent">$30</span></li>
+                        </ul>
+                    </div>
+                    <!-- Add-Ons & Art -->
+                    <div class="bg-secondary p-6 rounded-lg shadow-lg">
+                        <h3 class="text-2xl font-semibold text-text-main mb-4" data-translate="services_addons">Add-Ons & Nail Art</h3>
+                        <ul class="space-y-4 text-gray-700">
+                            <li class="flex justify-between border-b border-primary pb-2"><span data-translate="service_removal">Gel Removal (Soak Off)</span> <span class="font-bold text-accent">$10</span></li>
+                            <li class="flex justify-between border-b border-primary pb-2"><span data-translate="service_french">French Tips</span> <span class="font-bold text-accent">$15</span></li>
+                            <li class="flex justify-between border-b border-primary pb-2"><span data-translate="service_simple_art">Simple Nail Art (per nail)</span> <span class="font-bold text-accent">$3+</span></li>
+                            <li class="flex justify-between"><span data-translate="service_detailed_art">Detailed Nail Art (per nail)</span> <span class="font-bold text-accent">$7+</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section id="gallery" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl md:text-5xl font-heading text-accent mb-2" data-translate="gallery_title">My Latest Work</h2>
+                    <p class="text-gray-600" data-translate="gallery_subtitle">A collection of my favorite designs.</p>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                    <!-- Replace these with your actual image URLs -->
+                    <div class="group relative overflow-hidden rounded-lg shadow-lg">
+                        <img src="https://placehold.co/500x500/846B8A/F5F0EC?text=Nail+Art+1" alt="Nail Art Design 1" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                    </div>
+                    <div class="group relative overflow-hidden rounded-lg shadow-lg">
+                        <img src="https://placehold.co/500x500/D8B4B6/363636?text=Nail+Art+2" alt="Nail Art Design 2" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                    </div>
+                    <div class="group relative overflow-hidden rounded-lg shadow-lg">
+                        <img src="https://placehold.co/500x500/846B8A/F5F0EC?text=Nail+Art+3" alt="Nail Art Design 3" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                    </div>
+                    <div class="group relative overflow-hidden rounded-lg shadow-lg">
+                        <img src="https://placehold.co/500x500/D8B4B6/363636?text=Nail+Art+4" alt="Nail Art Design 4" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                    </div>
+                    <div class="group relative overflow-hidden rounded-lg shadow-lg">
+                        <img src="https://placehold.co/500x500/D8B4B6/363636?text=Nail+Art+5" alt="Nail Art Design 5" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                    </div>
+                    <div class="group relative overflow-hidden rounded-lg shadow-lg">
+                        <img src="https://placehold.co/500x500/846B8A/F5F0EC?text=Nail+Art+6" alt="Nail Art Design 6" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                    </div>
+                    <div class="group relative overflow-hidden rounded-lg shadow-lg">
+                        <img src="https://placehold.co/500x500/D8B4B6/363636?text=Nail+Art+7" alt="Nail Art Design 7" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                    </div>
+                    <div class="group relative overflow-hidden rounded-lg shadow-lg">
+                        <img src="https://placehold.co/500x500/846B8A/F5F0EC?text=Nail+Art+8" alt="Nail Art Design 8" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Booking Section -->
+        <section id="booking" class="py-20 bg-primary/20 text-center">
+            <div class="container mx-auto px-6">
+                <h2 class="text-4xl md:text-5xl font-heading text-accent mb-4" data-translate="booking_title">Ready for Beautiful Nails?</h2>
+                <p class="max-w-2xl mx-auto text-gray-600 mb-8" data-translate="booking_text">
+                    Click the button below to view my availability and book your appointment online. I can't wait to see you!
+                </p>
+                <!-- This button should link to your booking service (e.g., Acuity, Square) -->
+                <a href="#" class="bg-accent text-white px-10 py-4 rounded-full text-lg font-semibold hover:bg-opacity-90 transition-all duration-300 shadow-lg transform hover:scale-105" data-translate="booking_cta">Book Online Now</a>
+            </div>
+        </section>
+
+        <!-- Contact & Location Section -->
+        <section id="contact" class="py-20">
+            <div class="container mx-auto px-6 grid md:grid-cols-2 gap-12">
+                <div>
+                    <h2 class="text-3xl font-semibold text-text-main mb-6" data-translate="contact_title">Get In Touch</h2>
+                    <div class="space-y-4 text-gray-700">
+                        <p><strong data-translate="contact_email">Email:</strong> contact@nailsbyanna.com</p>
+                        <p><strong data-translate="contact_phone">Phone (Text Only):</strong> (123) 456-7890</p>
+                        <p><strong data-translate="contact_address">Address:</strong> <span data-translate="address">123 Beauty Lane, Suite 100, City, State 54321</span></p>
+                        <div>
+                            <h3 class="font-semibold text-text-main mb-2" data-translate="hours_title">Hours of Operation</h3>
+                            <ul class="list-disc list-inside">
+                                <li data-translate="hours_weekday">Tuesday - Friday: 10:00 AM - 6:00 PM</li>
+                                <li data-translate="hours_saturday">Saturday: 10:00 AM - 4:00 PM</li>
+                                <li data-translate="hours_closed">Sunday & Monday: Closed</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <!-- Placeholder for Google Maps Embed -->
+                    <div class="bg-gray-200 h-80 rounded-lg shadow-md flex items-center justify-center">
+                        <p class="text-gray-500" data-translate="map_placeholder">Google Map Placeholder</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-primary/40 py-8">
+        <div class="container mx-auto px-6 text-center text-text-main">
+            <div class="flex justify-center space-x-6 mb-4">
+                <!-- Replace with your social media links -->
+                <a href="#" class="text-2xl hover:text-accent transition-colors duration-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                </a>
+                <a href="#" class="text-2xl hover:text-accent transition-colors duration-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                </a>
+            </div>
+            <p>&copy; <span id="year"></span> Nails by Anna. <span data-translate="footer_rights">All Rights Reserved.</span></p>
+        </div>
+    </footer>
+
+    <script>
+        // Translation data
+        const translations = {
+            en: {
+                nav_home: "Home",
+                nav_services: "Services",
+                nav_gallery: "Gallery",
+                nav_contact: "Contact",
+                nav_book: "Book Now",
+                hero_title: "Artistry at Your Fingertips",
+                hero_subtitle: "Experience bespoke nail care in a relaxing and professional environment.",
+                hero_cta: "Book Your Appointment",
+                about_title: "Welcome to my Studio",
+                about_text1: "Hi, I'm Anna! As a passionate and certified nail technician, I'm dedicated to providing beautiful, long-lasting manicures that reflect your personal style. I believe every set of nails is a unique work of art.",
+                about_text2: "My studio is a clean, calm, and welcoming space where you can relax while I work my magic. I use only high-quality, professional-grade products to ensure the health and beauty of your natural nails.",
+                services_title: "Services & Pricing",
+                services_subtitle: "Clear pricing for all your nail care needs.",
+                services_manicures: "Manicures",
+                services_addons: "Add-Ons & Nail Art",
+                service_classic: "Classic Manicure (with Gel)",
+                service_structured: "Structured Gel Manicure",
+                service_dry: "Dry Manicure",
+                service_removal: "Gel Removal (Soak Off)",
+                service_french: "French Tips",
+                service_simple_art: "Simple Nail Art (per nail)",
+                service_detailed_art: "Detailed Nail Art (per nail)",
+                gallery_title: "My Latest Work",
+                gallery_subtitle: "A collection of my favorite designs.",
+                booking_title: "Ready for Beautiful Nails?",
+                booking_text: "Click the button below to view my availability and book your appointment online. I can't wait to see you!",
+                booking_cta: "Book Online Now",
+                contact_title: "Get In Touch",
+                contact_email: "Email:",
+                contact_phone: "Phone (Text Only):",
+                contact_address: "Address:",
+                address: "123 Beauty Lane, Suite 100, City, State 54321",
+                hours_title: "Hours of Operation",
+                hours_weekday: "Tuesday - Friday: 10:00 AM - 6:00 PM",
+                hours_saturday: "Saturday: 10:00 AM - 4:00 PM",
+                hours_closed: "Sunday & Monday: Closed",
+                map_placeholder: "Google Map Placeholder",
+                footer_rights: "All Rights Reserved."
+            },
+            es: {
+                nav_home: "Inicio",
+                nav_services: "Servicios",
+                nav_gallery: "Galería",
+                nav_contact: "Contacto",
+                nav_book: "Reservar",
+                hero_title: "Arte en Tus Uñas",
+                hero_subtitle: "Experimenta cuidado personalizado de uñas en un ambiente relajante y profesional.",
+                hero_cta: "Reserva Tu Cita",
+                about_title: "Bienvenida a mi Estudio",
+                about_text1: "¡Hola, soy Anna! Como técnica de uñas apasionada y certificada, me dedico a proporcionar manicuras hermosas y duraderas que reflejen tu estilo personal. Creo que cada juego de uñas es una obra de arte única.",
+                about_text2: "Mi estudio es un espacio limpio, tranquilo y acogedor donde puedes relajarte mientras hago mi magia. Uso solo productos profesionales de alta calidad para asegurar la salud y belleza de tus uñas naturales.",
+                services_title: "Servicios y Precios",
+                services_subtitle: "Precios claros para todas tus necesidades de cuidado de uñas.",
+                services_manicures: "Manicuras",
+                services_addons: "Extras y Arte de Uñas",
+                service_classic: "Manicura Clásica (con Gel)",
+                service_structured: "Manicura de Gel Estructurado",
+                service_dry: "Manicura Seca",
+                service_removal: "Remoción de Gel",
+                service_french: "Puntas Francesas",
+                service_simple_art: "Arte Simple (por uña)",
+                service_detailed_art: "Arte Detallado (por uña)",
+                gallery_title: "Mi Trabajo Reciente",
+                gallery_subtitle: "Una colección de mis diseños favoritos.",
+                booking_title: "¿Lista para Uñas Hermosas?",
+                booking_text: "Haz clic en el botón de abajo para ver mi disponibilidad y reservar tu cita en línea. ¡No puedo esperar a verte!",
+                booking_cta: "Reservar Ahora",
+                contact_title: "Ponte en Contacto",
+                contact_email: "Email:",
+                contact_phone: "Teléfono (Solo Texto):",
+                contact_address: "Dirección:",
+                address: "123 Beauty Lane, Suite 100, Ciudad, Estado 54321",
+                hours_title: "Horarios de Atención",
+                hours_weekday: "Martes - Viernes: 10:00 AM - 6:00 PM",
+                hours_saturday: "Sábado: 10:00 AM - 4:00 PM",
+                hours_closed: "Domingo y Lunes: Cerrado",
+                map_placeholder: "Marcador de Mapa de Google",
+                footer_rights: "Todos los Derechos Reservados."
+            },
+            fr: {
+                nav_home: "Accueil",
+                nav_services: "Services",
+                nav_gallery: "Galerie",
+                nav_contact: "Contact",
+                nav_book: "Réserver",
+                hero_title: "L'Art au Bout de Vos Doigts",
+                hero_subtitle: "Découvrez des soins d'ongles sur mesure dans un environnement relaxant et professionnel.",
+                hero_cta: "Réservez Votre Rendez-vous",
+                about_title: "Bienvenue dans mon Studio",
+                about_text1: "Salut, je suis Anna ! En tant que technicienne en ongles passionnée et certifiée, je me consacre à fournir de belles manucures durables qui reflètent votre style personnel. Je crois que chaque ensemble d'ongles est une œuvre d'art unique.",
+                about_text2: "Mon studio est un espace propre, calme et accueillant où vous pouvez vous détendre pendant que je fais ma magie. J'utilise uniquement des produits professionnels de haute qualité pour assurer la santé et la beauté de vos ongles naturels.",
+                services_title: "Services et Tarifs",
+                services_subtitle: "Tarifs clairs pour tous vos besoins de soin des ongles.",
+                services_manicures: "Manucures",
+                services_addons: "Extras et Art des Ongles",
+                service_classic: "Manucure Classique (avec Gel)",
+                service_structured: "Manucure Gel Structuré",
+                service_dry: "Manucure Sèche",
+                service_removal: "Retrait de Gel",
+                service_french: "French Tips",
+                service_simple_art: "Art Simple (par ongle)",
+                service_detailed_art: "Art Détaillé (par ongle)",
+                gallery_title: "Mon Travail Récent",
+                gallery_subtitle: "Une collection de mes designs préférés.",
+                booking_title: "Prête pour de Beaux Ongles ?",
+                booking_text: "Cliquez sur le bouton ci-dessous pour voir ma disponibilité et réserver votre rendez-vous en ligne. J'ai hâte de vous voir !",
+                booking_cta: "Réserver Maintenant",
+                contact_title: "Contactez-moi",
+                contact_email: "Email :",
+                contact_phone: "Téléphone (Texte Seulement) :",
+                contact_address: "Adresse :",
+                address: "123 Beauty Lane, Suite 100, Ville, État 54321",
+                hours_title: "Heures d'Ouverture",
+                hours_weekday: "Mardi - Vendredi : 10h00 - 18h00",
+                hours_saturday: "Samedi : 10h00 - 16h00",
+                hours_closed: "Dimanche et Lundi : Fermé",
+                map_placeholder: "Emplacement Google Maps",
+                footer_rights: "Tous Droits Réservés."
+            }
+        };
+
+        // Current language
+        let currentLanguage = 'en';
+
+        // Initialize the website
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeWebsite();
+        });
+
+        function initializeWebsite() {
+            setupMobileMenu();
+            setupLanguageSelector();
+            setupSmoothScrolling();
+            setCurrentYear();
+            setupBookingButton();
+            
+            // Update page language attribute
+            document.documentElement.lang = currentLanguage;
+        }
+
+        function setupMobileMenu() {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            if (mobileMenuButton && mobileMenu) {
+                mobileMenuButton.addEventListener('click', function() {
+                    const isHidden = mobileMenu.classList.contains('hidden');
+                    mobileMenu.classList.toggle('hidden');
+                    mobileMenuButton.setAttribute('aria-expanded', !isHidden);
+                });
+
+                // Close mobile menu when a link is clicked
+                const navLinks = mobileMenu.querySelectorAll('a');
+                navLinks.forEach(link => {
+                    link.addEventListener('click', function() {
+                        mobileMenu.classList.add('hidden');
+                        mobileMenuButton.setAttribute('aria-expanded', 'false');
+                    });
+                });
+
+                // Close mobile menu when clicking outside
+                document.addEventListener('click', function(event) {
+                    if (!mobileMenu.contains(event.target) && !mobileMenuButton.contains(event.target)) {
+                        mobileMenu.classList.add('hidden');
+                        mobileMenuButton.setAttribute('aria-expanded', 'false');
+                    }
+                });
+            }
+        }
+
+        function setupLanguageSelector() {
+            const languageSelector = document.getElementById('language-selector');
+            if (languageSelector) {
+                languageSelector.addEventListener('change', function() {
+                    currentLanguage = this.value;
+                    updatePageLanguage();
+                    document.documentElement.lang = currentLanguage;
+                });
+            }
+        }
+
+        function updatePageLanguage() {
+            const elements = document.querySelectorAll('[data-translate]');
+            elements.forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (translations[currentLanguage] && translations[currentLanguage][key]) {
+                    element.textContent = translations[currentLanguage][key];
+                }
+            });
+        }
+
+        function setupSmoothScrolling() {
+            const links = document.querySelectorAll('a[href^="#"]');
+            links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        const headerHeight = document.querySelector('header').offsetHeight;
+                        const targetPosition = targetElement.offsetTop - headerHeight;
+                        
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        }
+
+        function setupBookingButton() {
+            const bookingBtns = document.querySelectorAll('a[href="#booking"], a[data-translate="booking_cta"]');
+            bookingBtns.forEach(btn => {
+                if (btn.getAttribute('data-translate') === 'booking_cta') {
+                    btn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        // Add your booking system integration here
+                        alert('Booking system integration would go here');
+                    });
+                }
+            });
+        }
+
+        function setCurrentYear() {
+            const yearElement = document.getElementById('year');
+            if (yearElement) {
+                yearElement.textContent = new Date().getFullYear();
+            }
+        }
+
+        // Error handling for images
+        document.addEventListener('error', function(e) {
+            if (e.target.tagName === 'IMG') {
+                e.target.src = 'https://placehold.co/500x500/D8B4B6/363636?text=Image+Not+Found';
+            }
+        }, true);
+
+        // Performance optimization: Intersection Observer for animations
+        if ('IntersectionObserver' in window) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-fade-in-up');
+                    }
+                });
+            });
+
+            document.querySelectorAll('section').forEach(section => {
+                observer.observe(section);
+            });
+        }
+    </script>
+</body>
+</html>
