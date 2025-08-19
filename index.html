@@ -78,6 +78,72 @@
             100% { transform: rotate(360deg); }
         }
         
+        /* Logo styling to match business card exactly */
+        .logo-container {
+            position: relative;
+            display: grid;
+            place-items: center;
+            width: 160px;
+            height: 60px;
+        }
+        
+        .logo-nails {
+            grid-column: 1;
+            grid-row: 1;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #FFFFFF;
+            opacity: 0.8;
+            z-index: 1;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .logo-by-anna {
+            grid-column: 1;
+            grid-row: 1;
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: #363636;
+            z-index: 2;
+            text-shadow: 0 1px 3px rgba(255,255,255,0.8);
+        }
+        
+        /* Mobile logo adjustments */
+        @media (max-width: 768px) {
+            .logo-container {
+                width: 120px;
+                height: 45px;
+            }
+            
+            .logo-nails {
+                font-size: 1.8rem;
+            }
+            
+            .logo-by-anna {
+                font-size: 1.6rem;
+            }
+        }
+        
+        /* Prevent text overlap */
+        .hero-content {
+            z-index: 10;
+            position: relative;
+        }
+        
+        .hero-title {
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+        
+        .hero-subtitle {
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+        
         /* Accessibility improvements */
         .sr-only {
             position: absolute;
@@ -96,12 +162,59 @@
             outline: 2px solid #846B8A;
             outline-offset: 2px;
         }
+        
+        /* Responsive fixes */
+        @media (max-width: 640px) {
+            .hero-title {
+                font-size: 3rem !important;
+                line-height: 1.1;
+                margin-bottom: 1rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem !important;
+                line-height: 1.5;
+                margin-bottom: 1.5rem;
+            }
+        }
+        
+        /* Gallery hover effects */
+        .gallery-item {
+            aspect-ratio: 1;
+            overflow: hidden;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        /* Service cards responsive */
+        .service-card {
+            background: #F5F0EC;
+            min-height: 280px;
+        }
+        
+        /* Contact section spacing */
+        .contact-info {
+            line-height: 1.8;
+        }
+        
+        .contact-info p {
+            margin-bottom: 0.75rem;
+        }
     </style>
 </head>
 <body class="bg-secondary font-body text-text-main">
     <!-- Language Selector -->
     <div class="bg-accent/10 py-2">
-        <div class="container mx-auto px-6 flex justify-end">
+        <div class="container mx-auto px-4 sm:px-6 flex justify-end">
             <select id="language-selector" class="bg-transparent text-sm text-text-main focus:outline-none cursor-pointer">
                 <option value="en">English</option>
                 <option value="es">Español</option>
@@ -111,91 +224,115 @@
     </div>
 
     <!-- Header & Navigation -->
-    <header class="bg-secondary/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <!-- Updated Logo to match business card -->
-            <a href="#home" class="relative grid place-items-center w-32 h-12" title="Nails by Anna Home">
-                <span class="font-body text-5xl font-extrabold uppercase tracking-widest text-text-main/20 col-start-1 row-start-1">Nails</span>
-                <span class="font-heading text-3xl text-accent col-start-1 row-start-1">by Anna</span>
+    <header class="bg-secondary/95 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+            <!-- Logo matching business card -->
+            <a href="#home" class="logo-container focus-visible" title="Nails by Anna Home" aria-label="Nails by Anna - Home">
+                <span class="logo-nails" aria-hidden="true">NAILS</span>
+                <span class="logo-by-anna">by anna</span>
             </a>
-            <div class="hidden md:flex space-x-8 items-center">
-                <a href="#home" class="hover:text-accent transition-colors duration-300" data-translate="nav_home">Home</a>
-                <a href="#services" class="hover:text-accent transition-colors duration-300" data-translate="nav_services">Services</a>
-                <a href="#gallery" class="hover:text-accent transition-colors duration-300" data-translate="nav_gallery">Gallery</a>
-                <a href="#contact" class="hover:text-accent transition-colors duration-300" data-translate="nav_contact">Contact</a>
-                <a href="#booking" class="bg-accent text-white px-5 py-2 rounded-full hover:bg-opacity-90 transition-all duration-300 shadow-md" data-translate="nav_book">Book Now</a>
+            
+            <div class="hidden md:flex space-x-6 lg:space-x-8 items-center">
+                <a href="#home" class="hover:text-accent transition-colors duration-300 focus-visible" data-translate="nav_home">Home</a>
+                <a href="#services" class="hover:text-accent transition-colors duration-300 focus-visible" data-translate="nav_services">Services</a>
+                <a href="#gallery" class="hover:text-accent transition-colors duration-300 focus-visible" data-translate="nav_gallery">Gallery</a>
+                <a href="#contact" class="hover:text-accent transition-colors duration-300 focus-visible" data-translate="nav_contact">Contact</a>
+                <a href="#booking" class="bg-accent text-white px-4 lg:px-5 py-2 rounded-full hover:bg-opacity-90 transition-all duration-300 shadow-md focus-visible text-sm lg:text-base" data-translate="nav_book">Book Now</a>
             </div>
+            
             <!-- Mobile Menu Button -->
-            <button id="mobile-menu-button" class="md:hidden text-2xl">
+            <button id="mobile-menu-button" class="md:hidden text-2xl focus-visible" aria-label="Toggle mobile menu" aria-expanded="false">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
                 </svg>
             </button>
         </nav>
+        
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 space-y-2">
-            <a href="#home" class="block hover:text-accent transition-colors duration-300" data-translate="nav_home">Home</a>
-            <a href="#services" class="block hover:text-accent transition-colors duration-300" data-translate="nav_services">Services</a>
-            <a href="#gallery" class="block hover:text-accent transition-colors duration-300" data-translate="nav_gallery">Gallery</a>
-            <a href="#contact" class="block hover:text-accent transition-colors duration-300" data-translate="nav_contact">Contact</a>
-            <a href="#booking" class="block bg-accent text-white text-center mt-2 px-5 py-2 rounded-full hover:bg-opacity-90 transition-all duration-300 shadow-md" data-translate="nav_book">Book Now</a>
+        <div id="mobile-menu" class="hidden md:hidden px-4 sm:px-6 pb-4 space-y-2">
+            <a href="#home" class="block hover:text-accent transition-colors duration-300 focus-visible py-2" data-translate="nav_home">Home</a>
+            <a href="#services" class="block hover:text-accent transition-colors duration-300 focus-visible py-2" data-translate="nav_services">Services</a>
+            <a href="#gallery" class="block hover:text-accent transition-colors duration-300 focus-visible py-2" data-translate="nav_gallery">Gallery</a>
+            <a href="#contact" class="block hover:text-accent transition-colors duration-300 focus-visible py-2" data-translate="nav_contact">Contact</a>
+            <a href="#booking" class="block bg-accent text-white text-center mt-3 px-5 py-3 rounded-full hover:bg-opacity-90 transition-all duration-300 shadow-md focus-visible" data-translate="nav_book">Book Now</a>
         </div>
     </header>
 
     <main>
         <!-- Hero Section -->
-        <section id="home" class="relative min-h-[60vh] md:min-h-[80vh] flex items-center bg-cover bg-center" style="background-image: url('https://placehold.co/1600x900/D8B4B6/F5F0EC?text=Beautiful+Nails');">
-            <div class="absolute inset-0 bg-black bg-opacity-30"></div>
-            <div class="container mx-auto px-6 text-center relative z-10">
-                <h1 class="text-5xl md:text-8xl font-heading text-white font-bold mb-4 animate-fade-in-down" data-translate="hero_title">Artistry at Your Fingertips</h1>
-                <p class="text-lg md:text-xl text-white max-w-2xl mx-auto mb-8" data-translate="hero_subtitle">Experience bespoke nail care in a relaxing and professional environment.</p>
-                <a href="#booking" class="bg-accent text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-opacity-90 transition-all duration-300 shadow-lg transform hover:scale-105" data-translate="hero_cta">Book Your Appointment</a>
+        <section id="home" class="relative min-h-[70vh] sm:min-h-[80vh] flex items-center bg-cover bg-center" style="background-image: url('https://placehold.co/1600x900/D8B4B6/F5F0EC?text=Beautiful+Nails');">
+            <div class="absolute inset-0 bg-black bg-opacity-40"></div>
+            <div class="container mx-auto px-4 sm:px-6 text-center hero-content">
+                <h1 class="hero-title text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-heading text-white font-bold animate-fade-in-down" data-translate="hero_title">Artistry at Your Fingertips</h1>
+                <p class="hero-subtitle text-lg sm:text-xl md:text-xl lg:text-2xl text-white max-w-3xl mx-auto animate-fade-in-up" data-translate="hero_subtitle">Experience bespoke nail care in a relaxing and professional environment.</p>
+                <a href="#booking" class="inline-block bg-accent text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full text-base sm:text-lg font-semibold hover:bg-opacity-90 transition-all duration-300 shadow-lg transform hover:scale-105 focus-visible animate-scale-in" data-translate="hero_cta">Book Your Appointment</a>
             </div>
         </section>
 
         <!-- About Section -->
-        <section id="about" class="py-20">
-            <div class="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
-                <div class="text-center md:text-left">
-                    <h2 class="text-4xl md:text-5xl font-heading text-accent mb-4" data-translate="about_title">Welcome to my Studio</h2>
-                    <p class="mb-4 text-gray-600 leading-relaxed" data-translate="about_text1">
+        <section id="about" class="py-16 sm:py-20">
+            <div class="container mx-auto px-4 sm:px-6 grid md:grid-cols-2 gap-8 lg:gap-12 items-center">
+                <div class="text-center md:text-left order-2 md:order-1">
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-heading text-accent mb-4 sm:mb-6" data-translate="about_title">Welcome to my Studio</h2>
+                    <p class="mb-4 sm:mb-6 text-gray-600 leading-relaxed text-base sm:text-lg" data-translate="about_text1">
                         Hi, I'm Anna! As a passionate and certified nail technician, I'm dedicated to providing beautiful, long-lasting manicures that reflect your personal style. I believe every set of nails is a unique work of art.
                     </p>
-                    <p class="text-gray-600 leading-relaxed" data-translate="about_text2">
+                    <p class="text-gray-600 leading-relaxed text-base sm:text-lg" data-translate="about_text2">
                         My studio is a clean, calm, and welcoming space where you can relax while I work my magic. I use only high-quality, professional-grade products to ensure the health and beauty of your natural nails.
                     </p>
                 </div>
-                <div>
-                    <img src="https://placehold.co/600x600/D8B4B6/363636?text=Anna" alt="Nail Technician Anna" class="rounded-lg shadow-2xl w-full max-w-md mx-auto aspect-square object-cover">
+                <div class="order-1 md:order-2">
+                    <img src="https://placehold.co/600x600/D8B4B6/363636?text=Anna" alt="Nail Technician Anna" class="rounded-lg shadow-2xl w-full max-w-md mx-auto aspect-square object-cover" loading="lazy">
                 </div>
             </div>
         </section>
         
         <!-- Services Section -->
-        <section id="services" class="py-20 bg-primary/20">
-            <div class="container mx-auto px-6">
+        <section id="services" class="py-16 sm:py-20 bg-primary/20">
+            <div class="container mx-auto px-4 sm:px-6">
                 <div class="text-center mb-12">
-                    <h2 class="text-4xl md:text-5xl font-heading text-accent mb-2" data-translate="services_title">Services & Pricing</h2>
-                    <p class="text-gray-600" data-translate="services_subtitle">Clear pricing for all your nail care needs.</p>
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-heading text-accent mb-2 sm:mb-4" data-translate="services_title">Services & Pricing</h2>
+                    <p class="text-gray-600 text-base sm:text-lg" data-translate="services_subtitle">Clear pricing for all your nail care needs.</p>
                 </div>
-                <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
+                <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-6 lg:gap-8">
                     <!-- Manicures -->
-                    <div class="bg-secondary p-6 rounded-lg shadow-lg">
-                        <h3 class="text-2xl font-semibold text-text-main mb-4" data-translate="services_manicures">Manicures</h3>
+                    <div class="service-card p-6 sm:p-8 rounded-lg shadow-lg">
+                        <h3 class="text-xl sm:text-2xl font-semibold text-text-main mb-4 sm:mb-6" data-translate="services_manicures">Manicures</h3>
                         <ul class="space-y-4 text-gray-700">
-                            <li class="flex justify-between border-b border-primary pb-2"><span data-translate="service_classic">Classic Manicure (with Gel)</span> <span class="font-bold text-accent">$45</span></li>
-                            <li class="flex justify-between border-b border-primary pb-2"><span data-translate="service_structured">Structured Gel Manicure</span> <span class="font-bold text-accent">$55</span></li>
-                            <li class="flex justify-between"><span data-translate="service_dry">Dry Manicure</span> <span class="font-bold text-accent">$30</span></li>
+                            <li class="flex justify-between items-center border-b border-primary pb-3">
+                                <span class="text-sm sm:text-base" data-translate="service_classic">Classic Manicure (with Gel)</span> 
+                                <span class="font-bold text-accent text-lg">$45</span>
+                            </li>
+                            <li class="flex justify-between items-center border-b border-primary pb-3">
+                                <span class="text-sm sm:text-base" data-translate="service_structured">Structured Gel Manicure</span> 
+                                <span class="font-bold text-accent text-lg">$55</span>
+                            </li>
+                            <li class="flex justify-between items-center">
+                                <span class="text-sm sm:text-base" data-translate="service_dry">Dry Manicure</span> 
+                                <span class="font-bold text-accent text-lg">$30</span>
+                            </li>
                         </ul>
                     </div>
                     <!-- Add-Ons & Art -->
-                    <div class="bg-secondary p-6 rounded-lg shadow-lg">
-                        <h3 class="text-2xl font-semibold text-text-main mb-4" data-translate="services_addons">Add-Ons & Nail Art</h3>
+                    <div class="service-card p-6 sm:p-8 rounded-lg shadow-lg">
+                        <h3 class="text-xl sm:text-2xl font-semibold text-text-main mb-4 sm:mb-6" data-translate="services_addons">Add-Ons & Nail Art</h3>
                         <ul class="space-y-4 text-gray-700">
-                            <li class="flex justify-between border-b border-primary pb-2"><span data-translate="service_removal">Gel Removal (Soak Off)</span> <span class="font-bold text-accent">$10</span></li>
-                            <li class="flex justify-between border-b border-primary pb-2"><span data-translate="service_french">French Tips</span> <span class="font-bold text-accent">$15</span></li>
-                            <li class="flex justify-between border-b border-primary pb-2"><span data-translate="service_simple_art">Simple Nail Art (per nail)</span> <span class="font-bold text-accent">$3+</span></li>
-                            <li class="flex justify-between"><span data-translate="service_detailed_art">Detailed Nail Art (per nail)</span> <span class="font-bold text-accent">$7+</span></li>
+                            <li class="flex justify-between items-center border-b border-primary pb-3">
+                                <span class="text-sm sm:text-base" data-translate="service_removal">Gel Removal (Soak Off)</span> 
+                                <span class="font-bold text-accent text-lg">$10</span>
+                            </li>
+                            <li class="flex justify-between items-center border-b border-primary pb-3">
+                                <span class="text-sm sm:text-base" data-translate="service_french">French Tips</span> 
+                                <span class="font-bold text-accent text-lg">$15</span>
+                            </li>
+                            <li class="flex justify-between items-center border-b border-primary pb-3">
+                                <span class="text-sm sm:text-base" data-translate="service_simple_art">Simple Nail Art (per nail)</span> 
+                                <span class="font-bold text-accent text-lg">$3+</span>
+                            </li>
+                            <li class="flex justify-between items-center">
+                                <span class="text-sm sm:text-base" data-translate="service_detailed_art">Detailed Nail Art (per nail)</span> 
+                                <span class="font-bold text-accent text-lg">$7+</span>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -203,66 +340,65 @@
         </section>
 
         <!-- Gallery Section -->
-        <section id="gallery" class="py-20">
-            <div class="container mx-auto px-6">
+        <section id="gallery" class="py-16 sm:py-20">
+            <div class="container mx-auto px-4 sm:px-6">
                 <div class="text-center mb-12">
-                    <h2 class="text-4xl md:text-5xl font-heading text-accent mb-2" data-translate="gallery_title">My Latest Work</h2>
-                    <p class="text-gray-600" data-translate="gallery_subtitle">A collection of my favorite designs.</p>
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-heading text-accent mb-2 sm:mb-4" data-translate="gallery_title">My Latest Work</h2>
+                    <p class="text-gray-600 text-base sm:text-lg" data-translate="gallery_subtitle">A collection of my favorite designs.</p>
                 </div>
-                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                    <!-- Replace these with your actual image URLs -->
-                    <div class="group relative overflow-hidden rounded-lg shadow-lg">
-                        <img src="https://placehold.co/500x500/846B8A/F5F0EC?text=Nail+Art+1" alt="Nail Art Design 1" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
+                    <!-- Gallery images -->
+                    <div class="gallery-item group relative rounded-lg shadow-lg">
+                        <img src="https://placehold.co/500x500/846B8A/F5F0EC?text=Nail+Art+1" alt="Nail Art Design 1" loading="lazy">
                     </div>
-                    <div class="group relative overflow-hidden rounded-lg shadow-lg">
-                        <img src="https://placehold.co/500x500/D8B4B6/363636?text=Nail+Art+2" alt="Nail Art Design 2" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                    <div class="gallery-item group relative rounded-lg shadow-lg">
+                        <img src="https://placehold.co/500x500/D8B4B6/363636?text=Nail+Art+2" alt="Nail Art Design 2" loading="lazy">
                     </div>
-                    <div class="group relative overflow-hidden rounded-lg shadow-lg">
-                        <img src="https://placehold.co/500x500/846B8A/F5F0EC?text=Nail+Art+3" alt="Nail Art Design 3" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                    <div class="gallery-item group relative rounded-lg shadow-lg">
+                        <img src="https://placehold.co/500x500/846B8A/F5F0EC?text=Nail+Art+3" alt="Nail Art Design 3" loading="lazy">
                     </div>
-                    <div class="group relative overflow-hidden rounded-lg shadow-lg">
-                        <img src="https://placehold.co/500x500/D8B4B6/363636?text=Nail+Art+4" alt="Nail Art Design 4" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                    <div class="gallery-item group relative rounded-lg shadow-lg">
+                        <img src="https://placehold.co/500x500/D8B4B6/363636?text=Nail+Art+4" alt="Nail Art Design 4" loading="lazy">
                     </div>
-                    <div class="group relative overflow-hidden rounded-lg shadow-lg">
-                        <img src="https://placehold.co/500x500/D8B4B6/363636?text=Nail+Art+5" alt="Nail Art Design 5" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                    <div class="gallery-item group relative rounded-lg shadow-lg">
+                        <img src="https://placehold.co/500x500/D8B4B6/363636?text=Nail+Art+5" alt="Nail Art Design 5" loading="lazy">
                     </div>
-                    <div class="group relative overflow-hidden rounded-lg shadow-lg">
-                        <img src="https://placehold.co/500x500/846B8A/F5F0EC?text=Nail+Art+6" alt="Nail Art Design 6" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                    <div class="gallery-item group relative rounded-lg shadow-lg">
+                        <img src="https://placehold.co/500x500/846B8A/F5F0EC?text=Nail+Art+6" alt="Nail Art Design 6" loading="lazy">
                     </div>
-                    <div class="group relative overflow-hidden rounded-lg shadow-lg">
-                        <img src="https://placehold.co/500x500/D8B4B6/363636?text=Nail+Art+7" alt="Nail Art Design 7" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                    <div class="gallery-item group relative rounded-lg shadow-lg">
+                        <img src="https://placehold.co/500x500/D8B4B6/363636?text=Nail+Art+7" alt="Nail Art Design 7" loading="lazy">
                     </div>
-                    <div class="group relative overflow-hidden rounded-lg shadow-lg">
-                        <img src="https://placehold.co/500x500/846B8A/F5F0EC?text=Nail+Art+8" alt="Nail Art Design 8" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                    <div class="gallery-item group relative rounded-lg shadow-lg">
+                        <img src="https://placehold.co/500x500/846B8A/F5F0EC?text=Nail+Art+8" alt="Nail Art Design 8" loading="lazy">
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Booking Section -->
-        <section id="booking" class="py-20 bg-primary/20 text-center">
-            <div class="container mx-auto px-6">
-                <h2 class="text-4xl md:text-5xl font-heading text-accent mb-4" data-translate="booking_title">Ready for Beautiful Nails?</h2>
-                <p class="max-w-2xl mx-auto text-gray-600 mb-8" data-translate="booking_text">
+        <section id="booking" class="py-16 sm:py-20 bg-primary/20 text-center">
+            <div class="container mx-auto px-4 sm:px-6">
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-heading text-accent mb-4 sm:mb-6" data-translate="booking_title">Ready for Beautiful Nails?</h2>
+                <p class="max-w-2xl mx-auto text-gray-600 mb-6 sm:mb-8 text-base sm:text-lg leading-relaxed" data-translate="booking_text">
                     Click the button below to view my availability and book your appointment online. I can't wait to see you!
                 </p>
-                <!-- This button should link to your booking service (e.g., Acuity, Square) -->
-                <a href="#" class="bg-accent text-white px-10 py-4 rounded-full text-lg font-semibold hover:bg-opacity-90 transition-all duration-300 shadow-lg transform hover:scale-105" data-translate="booking_cta">Book Online Now</a>
+                <a href="#" class="inline-block bg-accent text-white px-8 sm:px-10 py-3 sm:py-4 rounded-full text-base sm:text-lg font-semibold hover:bg-opacity-90 transition-all duration-300 shadow-lg transform hover:scale-105 focus-visible" data-translate="booking_cta">Book Online Now</a>
             </div>
         </section>
 
         <!-- Contact & Location Section -->
-        <section id="contact" class="py-20">
-            <div class="container mx-auto px-6 grid md:grid-cols-2 gap-12">
-                <div>
-                    <h2 class="text-3xl font-semibold text-text-main mb-6" data-translate="contact_title">Get In Touch</h2>
-                    <div class="space-y-4 text-gray-700">
-                        <p><strong data-translate="contact_email">Email:</strong> contact@nailsbyanna.com</p>
-                        <p><strong data-translate="contact_phone">Phone (Text Only):</strong> (123) 456-7890</p>
-                        <p><strong data-translate="contact_address">Address:</strong> <span data-translate="address">123 Beauty Lane, Suite 100, City, State 54321</span></p>
-                        <div>
-                            <h3 class="font-semibold text-text-main mb-2" data-translate="hours_title">Hours of Operation</h3>
-                            <ul class="list-disc list-inside">
+        <section id="contact" class="py-16 sm:py-20">
+            <div class="container mx-auto px-4 sm:px-6 grid md:grid-cols-2 gap-8 lg:gap-12">
+                <div class="order-2 md:order-1">
+                    <h2 class="text-2xl sm:text-3xl font-semibold text-text-main mb-6" data-translate="contact_title">Get In Touch</h2>
+                    <div class="contact-info space-y-4 text-gray-700">
+                        <p class="text-base sm:text-lg"><strong data-translate="contact_email">Email:</strong> contact@nailsbyanna.com</p>
+                        <p class="text-base sm:text-lg"><strong data-translate="contact_phone">Phone (Text Only):</strong> (123) 456-7890</p>
+                        <p class="text-base sm:text-lg"><strong data-translate="contact_address">Address:</strong> <span data-translate="address">123 Beauty Lane, Suite 100, City, State 54321</span></p>
+                        <div class="pt-4">
+                            <h3 class="font-semibold text-text-main mb-3 text-lg" data-translate="hours_title">Hours of Operation</h3>
+                            <ul class="space-y-2 text-base sm:text-lg">
                                 <li data-translate="hours_weekday">Tuesday - Friday: 10:00 AM - 6:00 PM</li>
                                 <li data-translate="hours_saturday">Saturday: 10:00 AM - 4:00 PM</li>
                                 <li data-translate="hours_closed">Sunday & Monday: Closed</li>
@@ -270,10 +406,10 @@
                         </div>
                     </div>
                 </div>
-                <div>
+                <div class="order-1 md:order-2">
                     <!-- Placeholder for Google Maps Embed -->
-                    <div class="bg-gray-200 h-80 rounded-lg shadow-md flex items-center justify-center">
-                        <p class="text-gray-500" data-translate="map_placeholder">Google Map Placeholder</p>
+                    <div class="bg-gray-200 h-64 sm:h-80 rounded-lg shadow-md flex items-center justify-center">
+                        <p class="text-gray-500 text-base sm:text-lg" data-translate="map_placeholder">Google Map Placeholder</p>
                     </div>
                 </div>
             </div>
@@ -281,18 +417,17 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-primary/40 py-8">
-        <div class="container mx-auto px-6 text-center text-text-main">
+    <footer class="bg-primary/40 py-6 sm:py-8">
+        <div class="container mx-auto px-4 sm:px-6 text-center text-text-main">
             <div class="flex justify-center space-x-6 mb-4">
-                <!-- Replace with your social media links -->
-                <a href="#" class="text-2xl hover:text-accent transition-colors duration-300">
+                <a href="#" class="text-2xl hover:text-accent transition-colors duration-300 focus-visible" aria-label="Instagram">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
                 </a>
-                <a href="#" class="text-2xl hover:text-accent transition-colors duration-300">
+                <a href="#" class="text-2xl hover:text-accent transition-colors duration-300 focus-visible" aria-label="Facebook">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
                 </a>
             </div>
-            <p>&copy; <span id="year"></span> Nails by Anna. <span data-translate="footer_rights">All Rights Reserved.</span></p>
+            <p class="text-sm sm:text-base">&copy; <span id="year"></span> Nails by Anna. <span data-translate="footer_rights">All Rights Reserved.</span></p>
         </div>
     </footer>
 
@@ -553,6 +688,27 @@
                 observer.observe(section);
             });
         }
+
+        // Responsive text adjustments
+        function adjustResponsiveText() {
+            const heroTitle = document.querySelector('.hero-title');
+            const heroSubtitle = document.querySelector('.hero-subtitle');
+            
+            if (window.innerWidth < 640) {
+                if (heroTitle) {
+                    heroTitle.style.fontSize = '2.5rem';
+                    heroTitle.style.lineHeight = '1.1';
+                }
+                if (heroSubtitle) {
+                    heroSubtitle.style.fontSize = '1rem';
+                    heroSubtitle.style.lineHeight = '1.5';
+                }
+            }
+        }
+
+        // Run on load and resize
+        window.addEventListener('load', adjustResponsiveText);
+        window.addEventListener('resize', adjustResponsiveText);
     </script>
 </body>
 </html>
